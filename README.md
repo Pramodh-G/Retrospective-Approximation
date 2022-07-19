@@ -1,1 +1,26 @@
 # Retrospective-Approximation
+
+## Explanation of what is in the notebook folder:
+
+- `datagen.ipynb` is the file used to generate data for the logit model
+- `datagen-LR.ipynb` is the notebook used to generate data for a logistic regression experiment
+- `datagen-pasupathy` is the notebook used to generate data to reproduce the pasupathy paper.
+	- The paper uses a linear regression dataset with 1000 covariates and 10000 dataset size, it is large
+	- Hence, I use a dataset with 10000 examples and 300 covariates.
+	- I have not included the dataset since it is 300 MB and hence cant fit on github. you can use this to generate the data for yourself.
+- `Optimization-Pasupathy-linreg.ipynb` has an example which solves the problem using optim.jl
+- `Optimization-Pasupathy-lbfgs-fast.ipynb` uses a version of lbfgs which is optimized and allocates less.
+	- it approximates the inverse hessian instead of the actual hessian
+	- The idea for memory optimization(to use circular arrays for the gradient and iterate differences) was imported from optim.jl
+	- The implementation details were used from wikipedia. The links are provided in the notebook.
+
+## how to run the code
+
+- Clone the directory using `git clone`
+- startup the julia REPL. go to package mode and execute `activate` and `instantiate`
+- do the following in the repl mode
+```julia
+using IJulia
+notebook(dir="./")
+```
+- this requires jupyter-notebook to be installed and to be available on path variable.
