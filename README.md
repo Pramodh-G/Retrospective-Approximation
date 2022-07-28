@@ -24,3 +24,14 @@ using IJulia
 notebook(dir="./")
 ```
 - this requires jupyter-notebook to be installed and to be available on path variable.
+
+
+## A concise report of the work I did
+
+- RA with SGD as the inner solver can beat standard SGD given we hand tune the batch sizes and epsilons.
+- This might get tiring for bigger problems, might take up a lot of time.
+- I tried to reproduce Pasupathy et.al's paper, which used a custom LBFGS solver.
+- Using Optim.jl's implementation of LBFGS did not work when comparing against standard LBFGS because the information from inner iterations was not carried over.
+- I implemented a custom LBFGS algorithm which carried over the iterates from one inner iteration to the next.
+- I also implemented the stopping tests, which helped remove the effort of tuning epsilons in the inner iterations.
+- When LBFGS + stopping tests was used, it was observed that RA + LBFGS performed comparable to LBFGS with stochastic gradients.
